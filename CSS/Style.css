@@ -1,0 +1,60 @@
+html,body{
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+.page{
+    width: 100%;
+    height: 100vh;
+    background-color: teal;
+    overflow: hidden;
+}
+.page1{
+    background-image: url("../asset/back1.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.page1 .top{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 100%;
+
+
+}
+.page1 .top h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 1vw;
+}
+.top-logo{
+    width: 5vw;
+    margin: 2%;
+}
+
+.page1 .mid{
+    display: flex;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
+}
+.page1 .mid h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight: 2000;
+    font-size: 5vw;
+    color: #E8F0F2;
+}
+.page1 .bottom{
+    display: flex;
+    height: 20%;
+    align-items: center;
+    justify-content: center;
+}
+.page1 .bottom h2{
+    margin: 1%;
+}
