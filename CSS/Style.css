@@ -10,7 +10,7 @@ html,body{
     background-color: #476072;
     overflow: hidden;
 }
-#page1 .container1{
+.page1 .container1{
     display: flex;
     width: 15%;
     height: auto;
@@ -22,7 +22,7 @@ html,body{
 #321{
     justify-content: end;
 }
-#page1{
+.page1{
     background-image: url("../asset/back2.jpg");
     height: 100vh;
     width: 100%;
@@ -31,7 +31,7 @@ html,body{
     background-size: cover;
     position: relative;
 }
-#page1 .top{
+.page1 .top{
     display:flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +39,7 @@ html,body{
     width: 100%;
     color: #334257;
 }
-#page1 .top h2{
+.page1 .top h2{
     font-family: Arial, Helvetica, sans-serif;
     font-style: italic;
     font-size: 1.5vw;
@@ -52,46 +52,46 @@ html,body{
     margin: 2%;
 }
 
-#page1 .mid{
+.page1 .mid{
     display: flex;
     height: 60%;
     align-items: center;
     justify-content: center;
 }
-#page1 .mid h1{
+.page1 .mid h1{
     font-family: Arial, Helvetica, sans-serif;
     font-style:normal;
     font-weight: 2000;
     font-size: 5vw;
     color: #EEEEEE;
 }
-#page1 .mid :hover{
+.page1 .mid :hover{
     transition: ease-in-out 200ms;
     color: #476072;
 }
-#page1 .bottom{
+.page1 .bottom{
     display: flex;
     height: 20%;
     align-items:center;
     justify-content: center;
     color: #548CA8;
 }
-#page1 .bottom h2{
+.page1 .bottom h2{
     margin: 1%;
     font-size: 1.5vw;
 }
-#page1 .bottom p{
+.page1 .bottom p{
     font-family: Arial, Helvetica, sans-serif;
     font-style: italic;
     font-weight: 700;
     font-size: 1vw;
 }
-#page1 .bottom p:hover{
+.page1 .bottom p:hover{
     transition: ease-in 100ms;
     color: #EEEEEE;
 }
 
-#page1 .button-bottom{
+.page1 .button-bottom{
     text-decoration: none;
     color: inherit;
 }
