@@ -7,10 +7,10 @@ html,body{
 .page{
     width: 100%;
     height: 100vh;
-    background-color: #476072;
+    background: linear-gradient(45deg,#476072,#548CA8);
     overflow: hidden;
 }
-.page1 .container1{
+#page1 .container1{
     display: flex;
     width: 15%;
     height: auto;
@@ -22,7 +22,7 @@ html,body{
 #321{
     justify-content: end;
 }
-.page1{
+#page1{
     background-image: url("../asset/back2.jpg");
     height: 100vh;
     width: 100%;
@@ -31,7 +31,7 @@ html,body{
     background-size: cover;
     position: relative;
 }
-.page1 .top{
+#page1 .top{
     display:flex;
     align-items: center;
     justify-content: center;
@@ -39,9 +39,8 @@ html,body{
     width: 100%;
     color: #334257;
 }
-.page1 .top h2{
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: italic;
+#page1 .top h2{
+    font-family: Titillium Web, serif;
     font-size: 1.5vw;
 }
 .top-logo{
@@ -52,46 +51,101 @@ html,body{
     margin: 2%;
 }
 
-.page1 .mid{
+#page1 .mid{
     display: flex;
     height: 60%;
     align-items: center;
     justify-content: center;
 }
-.page1 .mid h1{
-    font-family: Arial, Helvetica, sans-serif;
-    font-style:normal;
+#page1 .mid h1{
+    font-family: Titillium Web, serif;
+    font-style: italic;
     font-weight: 2000;
     font-size: 5vw;
     color: #EEEEEE;
 }
-.page1 .mid :hover{
+#page1 .mid :hover{
     transition: ease-in-out 200ms;
     color: #476072;
 }
-.page1 .bottom{
+#page1 .bottom{
     display: flex;
     height: 20%;
     align-items:center;
     justify-content: center;
     color: #548CA8;
 }
-.page1 .bottom h2{
+#page1 .bottom h2{
     margin: 1%;
     font-size: 1.5vw;
 }
-.page1 .bottom p{
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: italic;
-    font-weight: 700;
+#page1 .bottom p{
+    font-family: Titillium Web, serif;
+    font-style: light;
     font-size: 1vw;
 }
-.page1 .bottom p:hover{
+#page1 .bottom p:hover{
     transition: ease-in 100ms;
     color: #EEEEEE;
 }
 
-.page1 .button-bottom{
+#page1 .button-bottom{
     text-decoration: none;
     color: inherit;
+}
+
+#hal-profile{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#hal-profile .container-photo{
+    display: flex;
+    margin: 5vw;
+}
+#hal-profile .container-photo img{
+    width: 40vw;
+    max-width: 450px;
+}
+
+#hal-profile .container-desc{
+    margin: 3vw;
+    flex-direction: column;
+    color: #EEEE;
+}
+
+#hal-profile .name{
+    font-family: Titillium Web, serif;
+    font-style: Bold;
+    font-size: 100%;
+    text-shadow: 5px 5px 3px #334257;
+    padding: 0;
+}
+#hal-profile .desc{
+    display: flex;
+
+    font-family: Titillium Web, serif;
+    font-style: normal;
+    font-size: 1vw;
+}
+
+.social-media{
+    margin-top: 4%;
+    display: flex;
+    color: #334257;
+    width: 20%;
+    justify-content: space-between;
+
+}
+.button-sos{
+    text-decoration: none;
+    color: inherit;
+    font-size: 2vw;
+}
+
+.button-sos:hover{
+    transition: ease-in 200ms;
+    color: #EEEE;
 }
