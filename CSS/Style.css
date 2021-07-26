@@ -1,14 +1,27 @@
 html,body{
     border: 0px;
-
+    font-family: Titillium Web, serif;
     margin: 0px;
     width: 100%;
 }
 .page{
     width: 100%;
     height: 100vh;
-    background: linear-gradient(45deg,#476072,#548CA8);
     overflow: hidden;
+}
+.page-mid{
+    width: 100%;
+    height: 500vh;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    background: linear-gradient(45deg,#476072,#548CA8);
+}
+.page-mid #layer1{
+    position: absolute;
+    height: 500vh;
+    width: 100%;
+    opacity: 30%;
 }
 #page1 .container1{
     display: flex;
@@ -40,7 +53,6 @@ html,body{
     color: #334257;
 }
 #page1 .top h2{
-    font-family: Titillium Web, serif;
     font-size: 1.5vw;
 }
 .top-logo{
@@ -58,15 +70,14 @@ html,body{
     justify-content: center;
 }
 #page1 .mid h1{
-    font-family: Titillium Web, serif;
     font-style: italic;
     font-weight: 2000;
     font-size: 5vw;
-    color: #EEEEEE;
+    color: #476072;
 }
 #page1 .mid :hover{
     transition: ease-in-out 200ms;
-    color: #476072;
+    color: #EEEEEE;
 }
 #page1 .bottom{
     display: flex;
@@ -80,7 +91,6 @@ html,body{
     font-size: 1.5vw;
 }
 #page1 .bottom p{
-    font-family: Titillium Web, serif;
     font-style: light;
     font-size: 1vw;
 }
@@ -97,36 +107,40 @@ html,body{
 #hal-profile{
     display: flex;
     width: 100%;
+    height: 75vh;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 #hal-profile .container-photo{
     display: flex;
-    margin: 5vw;
+    width: 40vw;
+    margin-left: 5vw;
+    z-index: 2;
 }
 #hal-profile .container-photo img{
     width: 40vw;
     max-width: 450px;
+    overflow: hidden;
 }
 
 #hal-profile .container-desc{
+    display: flex;
+    width: 60vw;
     margin: 3vw;
     flex-direction: column;
     color: #EEEE;
 }
 
 #hal-profile .name{
-    font-family: Titillium Web, serif;
     font-style: Bold;
-    font-size: 100%;
-    text-shadow: 5px 5px 3px #334257;
+    font-size: 150%;
+    text-shadow: 5px -5px 3px #334257;
     padding: 0;
 }
 #hal-profile .desc{
     display: flex;
-
-    font-family: Titillium Web, serif;
     font-style: normal;
     font-size: 1vw;
 }
@@ -148,4 +162,78 @@ html,body{
 .button-sos:hover{
     transition: ease-in 200ms;
     color: #EEEE;
+}
+
+.hal-about{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.container-about{
+    display: flex;
+    flex-direction: column
+}
+.about{
+    display: flex;
+    width: 100%;
+    height: 45vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.about .container-img{
+    display: flex;
+    width: 40%;
+    height: 100%;
+    max-height: 50vh;
+    overflow: hidden;
+    border-radius: 100px;
+    margin:5vw;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-img img{
+    width: 60vw;
+    height: auto;
+    filter: brightness(50%);
+}
+.container-img h1{
+    position: absolute;
+    color: #EEEEEE;
+}
+.container-img img:hover{
+    transition: ease-in 200ms;
+    filter: brightness(100%);
+}
+
+.container-penjelasan{
+    color: #EEEE;
+    margin: 5vw;
+    width: 60%;
+    font-size: 1,5vw;   
+}
+
+#text321{
+    text-align: right;
+}
+
+.title-about{
+    display: flex;
+    align-items:flex-end;
+    margin-left: 5vw;
+    justify-content: start;
+    height: 5vh;
+}
+
+.title-about h1{
+    margin: 0.5vw;
+    background-color: #EEEE;
+    font-size: 1.2vw;
+    font-weight: 5px;
+    font-style: italic;
 }
