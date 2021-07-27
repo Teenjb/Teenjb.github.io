@@ -17,7 +17,7 @@ html,body{
     flex-direction: column;
     background: linear-gradient(45deg,#476072,#548CA8);
 }
-.page-mid #layer1{
+#layer1 img{
     position: absolute;
     height: 500vh;
     width: 100%;
@@ -111,13 +111,13 @@ html,body{
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    z-index: 0;
 }
 
 #hal-profile .container-photo{
     display: flex;
     width: 40vw;
     margin-left: 5vw;
-    z-index: 2;
 }
 #hal-profile .container-photo img{
     width: 40vw;
@@ -145,7 +145,7 @@ html,body{
     font-size: 1vw;
 }
 
-.social-media{
+#hal-profile .social-media{
     margin-top: 4%;
     display: flex;
     color: #334257;
@@ -153,13 +153,13 @@ html,body{
     justify-content: space-between;
 
 }
-.button-sos{
+#hal-profile .button-sos{
     text-decoration: none;
     color: inherit;
     font-size: 2vw;
 }
 
-.button-sos:hover{
+#hal-profile .button-sos:hover{
     transition: ease-in 200ms;
     color: #EEEE;
 }
@@ -171,6 +171,7 @@ html,body{
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    z-index: 0;
 }
 .container-about{
     display: flex;
@@ -190,7 +191,7 @@ html,body{
     height: 100%;
     max-height: 50vh;
     overflow: hidden;
-    border-radius: 100px;
+    border-radius: 40px;
     margin:5vw;
     position: relative;
     align-items: center;
@@ -199,6 +200,7 @@ html,body{
 
 .container-img img{
     width: 60vw;
+    min-height: 100%;
     height: auto;
     filter: brightness(50%);
 }
@@ -236,4 +238,33 @@ html,body{
     font-size: 1.2vw;
     font-weight: 5px;
     font-style: italic;
+}
+
+.hal-project{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 10;
+}
+.hal-project .project-window{
+    width: 65vw;
+    height: 80vh;
+    background-color:#EEEE;
+    border-radius: 40px;
+    overflow: hidden;
+
+}
+.slide-container{
+    display: inline-flex;
+    justify-content: center;
+    transform: translateX(-3.3vw);
+
+}
+
+.project-window video{
+    width: 75vw;
+    
 }
