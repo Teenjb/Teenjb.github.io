@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="CSS/Style.css">
         <link rel="icon" href="asset/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
     </head>
     <body>
@@ -45,6 +45,39 @@
             <div id="layer1">
                 <img src="asset/layer.png" alt="" >
             </div>
+            <div id="navbar">
+                <div class="container-button">
+                    <a href="#page1">
+                        <p>Home</h3>
+                    </a>
+                    <h3>/</h3>
+                    <a href="">
+                        <p>About</p>
+                    </a>
+                    <h3>/</h3>
+                    <a href="">
+                        <p>Project</p>
+                    </a>
+                    <h3>/</h3>
+                    <a href="">
+                        <p>Contact</p>
+                    </a>
+                </div>
+            </div>
+            <script>
+                window.onscroll = function() {myFunction()};
+                
+                var navbar = document.getElementById("navbar");
+                var sticky = navbar.offsetTop;
+                
+                function myFunction() {
+                  if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                  } else {
+                    navbar.classList.remove("sticky");
+                  }
+                }
+                </script>
             <div class="title-about">
                 <h1>#PROFILE</h1>
             </div>
@@ -99,11 +132,7 @@
             </div>
             <div class="hal-project" id="hal-project">
                 <div class="project-window">
-                    <div class="slide-container">
-                        <div class="slide">
-                            <video src="asset/Video/web vid.mp4" autoplay="true" muted="true" loop="true">
-                        </div>
-                    </div>
+                    <video src="asset/Video/web vid.mp4" autoplay="true" muted="true" loop="true">
                 </div>
                 <div class="container-code">
                     <a href="https://github.com/Teenjb?tab=repositories" class="">
@@ -114,7 +143,7 @@
             <div class="title-about">
                 <h1>#CONTACT</h1>
             </div>
-            <div class="end-page">
+            <div class="end-page" id="hal-contact">
                 <div class="container-end">
                     <form action="">
                         <div class="profile">
@@ -130,10 +159,10 @@
                         <div class="message">
                             <div class="pesan">
                                 <h3>Message</h3>
-                                <input type="text" id="input-message">
+                                <textarea name="message" id="pesan" cols="30" rows="5"></textarea>
                             </div>
                             <div class="submit">
-                                <input type="submit" name="send"> 
+                                <input type="submit" value="SEND"> 
                             </div>
                         </div>
                     </form>
