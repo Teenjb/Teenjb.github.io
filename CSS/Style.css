@@ -238,11 +238,17 @@ body::-webkit-scrollbar {
     color: #EEEE;
     margin: 5vw;
     width: 60%;
-    font-size: 1.2vw;   
+    font-size: 1.2vw; 
+    text-align: justify;  
 }
 
-#text321{
-    text-align: right;
+.container-penjelasan li{
+    font-weight: 800;
+}
+
+.container-penjelasan h3{
+    color: #334257;
+    font-size: 120%;
 }
 
 .title-about{
