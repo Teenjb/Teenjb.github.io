@@ -19,7 +19,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
   </head>
-  <body class="w-screen px-10 py-5 my-5">
+  <body class="w-screen sm:px-10 px-4 py-5 my-5">
     <header class="w-full flex justify-end">
       <nav
         class="lg:w-1/3 w-3/4 flex flex-row bg-[#579BB1] p-2 rounded-xl justify-around font-bold text-[#F8F4EA] drop-shadow-xl"
@@ -52,24 +52,24 @@
           </p>
         </article>
         <article
-          class="flex flex-row flex-wrap xl:w-1/2 lg:w-3/4 w-full sm:justify-between items-center lg:mt-0 mt-4"
+          class="flex flex-row flex-wrap xl:w-1/2 lg:w-3/4 w-full sm:justify-between justify-center items-center lg:mt-0 mt-4"
         >
           <a href="mailto:hi.fateen@gmail.com"
-            ><button class="h-10 bg-black text-white px-5 rounded-2xl">
+            ><button class="h-10 bg-black text-white px-5 sm:w-auto w-64 rounded-2xl">
               Contact Me
             </button></a
           >
           <a href="https://github.com/Teenjb"
-            ><img class="" src="assets/icon/github.png" alt="teen"
+            ><img class="m-2" src="assets/icon/github.png" alt="teen"
           /></a>
           <a href="https://www.instagram.com/fateen.njb/?hl=en"
-            ><img class="" src="assets/icon/instagram.png" alt="teen"
+            ><img class="m-2" src="assets/icon/instagram.png" alt="teen"
           /></a>
           <a href="https://www.linkedin.com/in/fateen-indramustika-109355175/"
-            ><img class="" src="assets/icon/linkedin.png" alt="teen"
+            ><img class="m-2" src="assets/icon/linkedin.png" alt="teen"
           /></a>
           <a href="https://twitter.com/FateenNajib"
-            ><img class="" src="assets/icon/Twitter.png" alt="teen"
+            ><img class="m-2" src="assets/icon/Twitter.png" alt="teen"
           /></a>
         </article>
       </div>
@@ -88,7 +88,7 @@
             <!-- Carousel wrapper -->
             <div class="relative h-72 overflow-hidden rounded-lg md:h-72 items-center">
               <!-- Item 1 -->
-              <div class="hidden duration-700 ease-in-out  md:p-24 p-16" data-carousel-item>
+              <div class="hidden duration-700 ease-in-out xl:p-24 lg:p-16 sm:p-6 p-4" data-carousel-item>
                 <div class="flex text-center">
                   <p class="mx-6">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos non sunt libero esse ad harum saepe officia voluptates praesentium maiores, error consectetur numquam magnam blanditiis, quisquam et fugit in aperiam? <br> <b>-Orang</b>
@@ -98,7 +98,7 @@
                 </div>
               </div>
               <!-- Item 2 -->
-              <div class="hidden duration-700 ease-in-out  md:p-24 p-16" data-carousel-item>
+              <div class="hidden duration-700 ease-in-out xl:p-24 lg:p-16 sm:p-6 p-4" data-carousel-item>
                 <div class="flex text-center">
                   <p class="mx-6">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos non sunt libero esse ad harum saepe officia voluptates praesentium maiores, error consectetur numquam magnam blanditiis, quisquam et fugit in aperiam? <br> <b>-Orang</b>
@@ -108,7 +108,7 @@
                 </div>
               </div>
               <!-- Item 3 -->
-              <div class="hidden duration-700 ease-in-out md:p-24 p-16" data-carousel-item>
+              <div class="hidden duration-700 ease-in-out xl:p-24 lg:p-16 sm:p-6 p-4" data-carousel-item>
                 <div class="flex text-center">
                   <p class="mx-6">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos non sunt libero esse ad harum saepe officia voluptates praesentium maiores, error consectetur numquam magnam blanditiis, quisquam et fugit in aperiam? <br> <b>-Orang</b>
@@ -118,7 +118,7 @@
                 </div>
               </div>
               <!-- Item 4 -->
-              <div class="hidden duration-700 ease-in-out md:p-24 p-16" data-carousel-item>
+              <div class="hidden duration-700 ease-in-out xl:p-24 lg:p-16 sm:p-6 p-4" data-carousel-item>
                 <div class="flex text-center">
                   <p class="mx-6">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos non sunt libero esse ad harum saepe officia voluptates praesentium maiores, error consectetur numquam magnam blanditiis, quisquam et fugit in aperiam? <br> <b>-Orang</b>
@@ -128,7 +128,7 @@
                 </div>
               </div>
               <!-- Item 5 -->
-              <div class="hidden duration-700 ease-in-out md:p-24 p-16" data-carousel-item>
+              <div class="hidden duration-700 ease-in-out xl:p-24 lg:p-16 sm:p-6 p-4" data-carousel-item>
                 <div class="flex text-center">
                   <p class="mx-6">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos non sunt libero esse ad harum saepe officia voluptates praesentium maiores, error consectetur numquam magnam blanditiis, quisquam et fugit in aperiam? <br> <b>-Orang</b>
@@ -181,7 +181,7 @@
             <!-- Slider controls -->
             <button
               type="button"
-              class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+              class="absolute hidden sm:block top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
               data-carousel-prev
             >
               <span
@@ -207,7 +207,7 @@
             </button>
             <button
               type="button"
-              class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+              class="absolute hidden sm:block top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
               data-carousel-next
             >
               <span
