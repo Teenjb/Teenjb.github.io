@@ -192,8 +192,8 @@
       <div
         class="relative flex flex-col justify-between lg:w-[60%] w-full lg:mt-0 mt-5 bg-[#F8F4EA] rounded-xl drop-shadow-xl md:p-6 p-3"
       >
-        <article class="w-full z-10">
-          <h1 class="w-full font-bold text-start sm:text-xl text-lg">
+        <article class="project w-full z-10">
+          <h1 class="containerw-full font-bold text-start sm:text-xl text-lg">
             Project
           </h1>
           <div class="w-full h-full grid md:grid-cols-4 grid-cols-2">
@@ -352,7 +352,7 @@
     var client = document.querySelector(".client");
     var paidProject = document.querySelector(".paid-project");
     var projectDone = document.querySelector(".project-done");
-    
+
     var project = {
       count1: 0,
       count2: 0,
@@ -360,13 +360,14 @@
       count4: 0,
     };
 
-    anime({
+    var animation = anime({
       targets: project,
       count1: 7,
       count2: 3,
       count3: 3,
       count4: 10,
       round: 1,
+      autoplay: false,
       easing: "linear",
       update: function () {
         personalProject.innerHTML = JSON.stringify(project.count1) + "+";
@@ -375,5 +376,17 @@
         projectDone.innerHTML = JSON.stringify(project.count4) + "+";
       },
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      // Loop over the entries
+      entries.forEach((entry) => {
+        // If the element is visible
+        if (entry.isIntersecting) {
+          animation.play();
+        }
+      });
+    });
+
+    observer.observe(document.querySelector(".project"));
   </script>
 </html>
