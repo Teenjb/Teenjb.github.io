@@ -23,6 +23,7 @@
       href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
   </head>
   <body class="w-screen sm:px-10 px-2 py-5">
     <header class="w-full flex justify-between">
@@ -111,7 +112,9 @@
       <div
         class="flex flex-col justify-between w-full bg-gradient-to-tl from-white via-[#F8F4EA] to-[#F8F4EA] rounded-xl md:p-6 p-3 drop-shadow-xl"
       >
-        <h1 class="font-bold sm:text-3xl text-2xl text-[#579BB1]">Recommendation</h1>
+        <h1 class="font-bold sm:text-3xl text-2xl text-[#579BB1]">
+          Recommendation
+        </h1>
         <section
           id="image-carousel"
           class="splide"
@@ -120,7 +123,9 @@
           <div class="splide__track">
             <ul class="splide__list">
               <li class="splide__slide">
-                <div class="sm:text-m text-sm flex flex-col justify-center items-center m-10">
+                <div
+                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Mollitia, dignissimos. Sunt consequatur mollitia aliquid
@@ -133,7 +138,9 @@
               </li>
 
               <li class="splide__slide">
-                <div class="sm:text-m text-sm flex flex-col justify-center items-center m-10">
+                <div
+                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Mollitia, dignissimos. Sunt consequatur mollitia aliquid
@@ -145,7 +152,9 @@
                 </div>
               </li>
               <li class="splide__slide">
-                <div class="sm:text-m text-sm flex flex-col justify-center items-center m-10">
+                <div
+                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Mollitia, dignissimos. Sunt consequatur mollitia aliquid
@@ -158,7 +167,9 @@
               </li>
 
               <li class="splide__slide">
-                <div class="sm:text-m text-sm flex flex-col justify-center items-center m-10">
+                <div
+                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Mollitia, dignissimos. Sunt consequatur mollitia aliquid
@@ -181,7 +192,9 @@
         class="relative flex flex-col justify-between lg:w-[60%] w-full lg:mt-0 mt-5 bg-[#F8F4EA] rounded-xl drop-shadow-xl md:p-6 p-3"
       >
         <article class="w-full z-10">
-          <h1 class="w-full font-bold text-start sm:text-xl text-lg">Project</h1>
+          <h1 class="w-full font-bold text-start sm:text-xl text-lg">
+            Project
+          </h1>
           <div class="w-full h-full grid md:grid-cols-4 grid-cols-2">
             <div class="h-full flex flex-col justify-center items-center">
               <h1 class="font-bold sm:text-6xl text-5xl">7+</h1>
@@ -213,7 +226,11 @@
       <aside
         class="flex flex-col items-center justify-between lg:w-[38.3%] md:p-6 p-3 bg-[#579BB1] rounded-xl drop-shadow-xl"
       >
-        <h2 class="text-white w-full h-full lg:mb-5 font-bold sm:text-xl text-lg">Tech Stack</h2>
+        <h2
+          class="text-white w-full h-full lg:mb-5 font-bold sm:text-xl text-lg"
+        >
+          Tech Stack
+        </h2>
         <img
           class="object-contain my-2"
           src="assets/icon/tech stack.svg"
@@ -229,12 +246,19 @@
   </body>
   <script>
     new Splide("#image-carousel", {
+      arrowPath: '0',
+      type   : 'loop',
       perPage: 2,
       breakpoints: {
         640: {
           perPage: 1,
         },
       },
-    }).mount();
+      autoScroll: {
+        speed: 1,
+        autoStart: true,
+        pauseOnHover: false,
+      },
+    }).mount(window.splide.Extensions);
   </script>
 </html>
