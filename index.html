@@ -59,7 +59,7 @@
             Hi! I’m Fateen, a last year computer engineering student at
             Universitas Indonesia.
           </h1>
-          <p class="desc sm:text-m text-sm">
+          <p class="desc sm:text-base text-sm">
             I am passionate about web development, internetworking, and cyber
             security. I am exceptionally skilled in working with the PERN
             (Postgres, Express, React, Node) Stack. Additionally, I have a good
@@ -120,11 +120,11 @@
           class="splide"
           aria-label="Beautiful Images"
         >
-          <div class="splide__track">
+          <div class="splide__track md:-mx-6 -mx-3">
             <ul class="splide__list">
               <li class="splide__slide">
                 <div
-                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                  class="sm:text-base text-sm flex flex-col justify-center items-center m-10"
                 >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -139,7 +139,7 @@
 
               <li class="splide__slide">
                 <div
-                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                  class="sm:text-base text-sm flex flex-col justify-center items-center m-10"
                 >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -153,7 +153,7 @@
               </li>
               <li class="splide__slide">
                 <div
-                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                  class="sm:text-base text-sm flex flex-col justify-center items-center m-10"
                 >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -168,7 +168,7 @@
 
               <li class="splide__slide">
                 <div
-                  class="sm:text-m text-sm flex flex-col justify-center items-center m-10"
+                  class="sm:text-base text-sm flex flex-col justify-center items-center m-10"
                 >
                   <p class="text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -238,6 +238,75 @@
         />
       </aside>
     </main>
+    <section class="w-full h-24 my-5 rounded-xl bg-black drop-shadow-xl">
+      <div class="w-full h-full flex justify-center items-center">
+        <p class="text-white font-bold text-xl">Experience</p>
+      </div>
+    </section>
+    <main class="flex flex-row flex-wrap w-full my-5 justify-between">
+      <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 w-full">
+        <section
+          class="sm:text-base text-sm flex flex-col bg-black rounded-xl justify-between items-center"
+        >
+          <div class="flex flex-col p-6 w-full">
+            <h2 class="font-bold text-2xl text-white">Telkom Indonesia</h2>
+            <h3 class="text-white text-lg">Data Engineer and Analyst</h3>
+            <p class="text-white font-black text-xl">...</p>
+            <p class="text-sm text-white">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
+              explicabo optio, nisi tenetur illum minus harum praesentium. Non
+              repellendus nam voluptatem atque deleniti velit saepe adipisci,
+              quo obcaecati iusto impedit.
+            </p>
+          </div>
+          <div
+            class="flex justify-center items-center w-full h-10 bg-[#579BB1] rounded-b-xl"
+          >
+            <h2 class="font-bold text-white">January 2023 - Present</h2>
+          </div>
+        </section>
+        <section
+          class="sm:text-base text-sm flex flex-col bg-black rounded-xl justify-between items-center"
+        >
+          <div class="flex flex-col p-6 w-full">
+            <h2 class="font-bold text-2xl text-white">Universitas Indonesia</h2>
+            <h3 class="text-white text-lg">Webisite Administrator</h3>
+            <p class="text-white font-black text-xl">...</p>
+            <p class="text-sm text-white">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
+              explicabo optio, nisi tenetur illum minus harum praesentium. Non
+              repellendus nam voluptatem atque deleniti velit saepe adipisci,
+              quo obcaecati iusto impedit.
+            </p>
+          </div>
+          <div
+            class="flex justify-center items-center w-full h-10 bg-[#579BB1] rounded-b-xl"
+          >
+            <h2 class="font-bold text-white">april 2022 - January 2023</h2>
+          </div>
+        </section>
+        <section
+          class="sm:text-base text-sm flex flex-col bg-black rounded-xl justify-between items-center"
+        >
+          <div class="flex flex-col p-6 w-full">
+            <h2 class="font-bold text-2xl text-white">Network Laboratory UI</h2>
+            <h3 class="text-white text-lg">Laboratory Assistant and Coordinator</h3>
+            <p class="text-white font-black text-xl">...</p>
+            <p class="text-sm text-white">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
+              explicabo optio, nisi tenetur illum minus harum praesentium. Non
+              repellendus nam voluptatem atque deleniti velit saepe adipisci,
+              quo obcaecati iusto impedit.
+            </p>
+          </div>
+          <div
+            class="flex justify-center items-center w-full h-10 bg-[#579BB1] rounded-b-xl"
+          >
+            <h2 class="font-bold text-white">June 2022 - Present</h2>
+          </div>
+        </section>
+      </div>
+    </main>
     <footer class="w-full h-24 rounded-xl bg-black drop-shadow-xl">
       <div class="w-full h-full flex justify-center items-center">
         <p class="text-white font-bold">TeenToon &#169; 2023</p>
@@ -246,9 +315,11 @@
   </body>
   <script>
     new Splide("#image-carousel", {
-      arrowPath: '0',
-      type   : 'loop',
+      arrows: false,
+      pagination: false,
+      type: "loop",
       perPage: 2,
+      focus: 0,
       breakpoints: {
         640: {
           perPage: 1,
@@ -260,5 +331,16 @@
         pauseOnHover: false,
       },
     }).mount(window.splide.Extensions);
+    new Splide("#exp-carousel", {
+      arrows: false,
+      type: "loop",
+      perPage: 3,
+      focus: 0,
+      breakpoints: {
+        640: {
+          perPage: 1,
+        },
+      },
+    }).mount();
   </script>
 </html>
