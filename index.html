@@ -24,6 +24,7 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   </head>
   <body class="w-screen sm:px-10 px-2 py-5">
     <header class="w-full flex justify-between">
@@ -197,19 +198,19 @@
           </h1>
           <div class="w-full h-full grid md:grid-cols-4 grid-cols-2">
             <div class="h-full flex flex-col justify-center items-center">
-              <h1 class="font-bold sm:text-6xl text-5xl">7+</h1>
+              <h1 class="personal-project font-bold sm:text-6xl text-5xl"></h1>
               <h2 class="sm:text-base text-sm">Personal Project</h2>
             </div>
             <div class="flex flex-col justify-center items-center">
-              <h1 class="font-bold sm:text-6xl text-5xl">2+</h1>
+              <h1 class="client font-bold sm:text-6xl text-5xl">2+</h1>
               <h2 class="sm:text-base text-sm">Client</h2>
             </div>
             <div class="flex flex-col justify-center items-center">
-              <h1 class="font-bold sm:text-6xl text-5xl">3+</h1>
+              <h1 class="paid-project font-bold sm:text-6xl text-5xl">3+</h1>
               <h2 class="sm:text-base text-sm">Paid Project</h2>
             </div>
             <div class="flex flex-col justify-center items-center">
-              <h1 class="font-bold sm:text-6xl text-5xl">10+</h1>
+              <h1 class="project-done font-bold sm:text-6xl text-5xl">10+</h1>
               <h2 class="sm:text-base text-sm">Project Done</h2>
             </div>
           </div>
@@ -240,7 +241,7 @@
     </main>
     <section class="w-full h-24 my-5 rounded-xl bg-black drop-shadow-xl">
       <div class="w-full h-full flex justify-center items-center">
-        <p class="text-white font-bold text-xl">Experience</p>
+        <p class="text-white font-bold sm:text-2xl text-xl">Experience</p>
       </div>
     </section>
     <main class="flex flex-row flex-wrap w-full my-5 justify-between">
@@ -249,8 +250,12 @@
           class="sm:text-base text-sm flex flex-col bg-black rounded-xl justify-between items-center"
         >
           <div class="flex flex-col p-6 w-full">
-            <h2 class="font-bold text-2xl text-white">Telkom Indonesia</h2>
-            <h3 class="text-white text-lg">Data Engineer and Analyst</h3>
+            <h2 class="font-bold sm:text-2xl text-xl text-white">
+              Telkom Indonesia
+            </h2>
+            <h3 class="text-white sm:text-lg text-base">
+              Data Engineer and Analyst
+            </h3>
             <p class="text-white font-black text-xl">...</p>
             <p class="text-sm text-white">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
@@ -269,8 +274,12 @@
           class="sm:text-base text-sm flex flex-col bg-black rounded-xl justify-between items-center"
         >
           <div class="flex flex-col p-6 w-full">
-            <h2 class="font-bold text-2xl text-white">Universitas Indonesia</h2>
-            <h3 class="text-white text-lg">Webisite Administrator</h3>
+            <h2 class="font-bold sm:text-2xl text-xl text-white">
+              Universitas Indonesia
+            </h2>
+            <h3 class="text-white sm:text-lg text-base">
+              Webisite Administrator
+            </h3>
             <p class="text-white font-black text-xl">...</p>
             <p class="text-sm text-white">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
@@ -289,8 +298,12 @@
           class="sm:text-base text-sm flex flex-col bg-black rounded-xl justify-between items-center"
         >
           <div class="flex flex-col p-6 w-full">
-            <h2 class="font-bold text-2xl text-white">Network Laboratory UI</h2>
-            <h3 class="text-white text-lg">Laboratory Assistant and Coordinator</h3>
+            <h2 class="font-bold sm:text-2xl text-xl text-white">
+              Network Laboratory UI
+            </h2>
+            <h3 class="text-white sm:text-lg text-base">
+              Laboratory Assistant and Coordinator
+            </h3>
             <p class="text-white font-black text-xl">...</p>
             <p class="text-sm text-white">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
@@ -309,7 +322,9 @@
     </main>
     <footer class="w-full h-24 rounded-xl bg-black drop-shadow-xl">
       <div class="w-full h-full flex justify-center items-center">
-        <p class="text-white font-bold">TeenToon &#169; 2023</p>
+        <p class="text-white font-bold sm:text-base text-xs">
+          TeenToon &#169; 2023
+        </p>
       </div>
     </footer>
   </body>
@@ -331,16 +346,34 @@
         pauseOnHover: false,
       },
     }).mount(window.splide.Extensions);
-    new Splide("#exp-carousel", {
-      arrows: false,
-      type: "loop",
-      perPage: 3,
-      focus: 0,
-      breakpoints: {
-        640: {
-          perPage: 1,
-        },
+  </script>
+  <script>
+    var personalProject = document.querySelector(".personal-project");
+    var client = document.querySelector(".client");
+    var paidProject = document.querySelector(".paid-project");
+    var projectDone = document.querySelector(".project-done");
+    
+    var project = {
+      count1: 0,
+      count2: 0,
+      count3: 0,
+      count4: 0,
+    };
+
+    anime({
+      targets: project,
+      count1: 7,
+      count2: 3,
+      count3: 3,
+      count4: 10,
+      round: 1,
+      easing: "linear",
+      update: function () {
+        personalProject.innerHTML = JSON.stringify(project.count1) + "+";
+        client.innerHTML = JSON.stringify(project.count2) + "+";
+        paidProject.innerHTML = JSON.stringify(project.count3) + "+";
+        projectDone.innerHTML = JSON.stringify(project.count4) + "+";
       },
-    }).mount();
+    });
   </script>
 </html>
