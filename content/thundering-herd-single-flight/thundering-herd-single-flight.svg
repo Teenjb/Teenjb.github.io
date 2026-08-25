@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4096" height="2400" viewBox="0 0 2048 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Thundering Herd versus Single-Flight Access</title>
+  <desc id="desc">Comparison of duplicate downstream calls caused by a cache miss and a single-flight accessor that shares one CompletableFuture.</desc>
+  <style>
+    .ink { fill: #10233f; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #5b6b83; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .label { fill: #5b6b83; font: 800 17px Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 2px; }
+    .small { font: 700 18px Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .body { font: 600 20px Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .card-title { font: 800 27px Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  </style>
+
+  <rect width="2048" height="1400" fill="#f4f7fb"/>
+  <text x="80" y="70" fill="#2563eb" font-family="Inter, sans-serif" font-size="18" font-weight="800" letter-spacing="3">MICROSERVICE RELIABILITY</text>
+  <text x="80" y="130" class="ink" font-size="54" font-weight="800" letter-spacing="-1.5">Thundering Herd vs. Single-Flight Access</text>
+  <text x="80" y="175" class="muted" font-size="23">A cache protects repeated reads after a value exists. Single-flight prevents duplicate work while it is being loaded.</text>
+
+  <!-- Comparison cards -->
+  <g>
+    <rect x="80" y="230" width="920" height="900" rx="24" fill="#fff" stroke="#d6dfeb" stroke-width="2"/>
+    <circle cx="125" cy="280" r="22" fill="#dc4c64"/>
+    <text x="125" y="289" text-anchor="middle" fill="#fff" font-size="25" font-weight="900">×</text>
+    <text x="165" y="278" class="card-title ink">Cache miss race</text>
+    <text x="165" y="309" class="muted" font-size="18">Every caller observes the miss and starts work.</text>
+    <line x1="80" y1="340" x2="1000" y2="340" stroke="#d6dfeb" stroke-width="2"/>
+
+    <text x="120" y="410" class="label">CONCURRENT CALLERS</text>
+    <g fill="#fbfcfe" stroke="#d6dfeb" stroke-width="2">
+      <rect x="540" y="370" width="160" height="58" rx="12"/><rect x="720" y="370" width="160" height="58" rx="12"/>
+      <rect x="540" y="442" width="160" height="58" rx="12"/><rect x="720" y="442" width="160" height="58" rx="12"/>
+    </g>
+    <g class="small ink"><text x="620" y="405" text-anchor="middle">Request A</text><text x="800" y="405" text-anchor="middle">Request B</text><text x="620" y="477" text-anchor="middle">Request C</text><text x="800" y="477" text-anchor="middle">Request D</text></g>
+    <text x="710" y="545" text-anchor="middle" fill="#e99aa5" font-size="35">↓</text>
+    <text x="120" y="605" class="label">CACHE LOOKUP</text>
+    <rect x="540" y="565" width="340" height="60" rx="12" fill="#fff7e6" stroke="#f1d69d" stroke-width="2"/>
+    <text x="710" y="603" text-anchor="middle" fill="#b7791f" class="body">MISS × 4</text>
+    <text x="710" y="675" text-anchor="middle" fill="#e99aa5" font-size="35">↓</text>
+    <text x="120" y="735" class="label">DOWNSTREAM CALLS</text>
+    <g class="small muted"><text x="540" y="725">Request A</text><text x="540" y="765">Request B</text><text x="540" y="805">Request C</text><text x="540" y="845">Request D</text></g>
+    <g fill="#dc4c64"><rect x="680" y="711" width="200" height="14" rx="7"/><rect x="680" y="751" width="200" height="14" rx="7"/><rect x="680" y="791" width="200" height="14" rx="7"/><rect x="680" y="831" width="200" height="14" rx="7"/></g>
+    <rect x="120" y="920" width="840" height="130" rx="16" fill="#fff0f2"/>
+    <text x="150" y="968" fill="#a52f45" class="body">Duplicate calls saturate the downstream service,</text>
+    <text x="150" y="1002" fill="#a52f45" class="body">increasing latency and triggering retries.</text>
+  </g>
+
+  <g>
+    <rect x="1048" y="230" width="920" height="900" rx="24" fill="#fff" stroke="#d6dfeb" stroke-width="2"/>
+    <circle cx="1093" cy="280" r="22" fill="#159a72"/>
+    <text x="1093" y="289" text-anchor="middle" fill="#fff" font-size="25" font-weight="900">✓</text>
+    <text x="1133" y="278" class="card-title ink">Single-flight accessor</text>
+    <text x="1133" y="309" class="muted" font-size="18">Only the first caller loads; the rest share its future.</text>
+    <line x1="1048" y1="340" x2="1968" y2="340" stroke="#d6dfeb" stroke-width="2"/>
+
+    <text x="1088" y="410" class="label">CONCURRENT CALLERS</text>
+    <g fill="#fbfcfe" stroke="#d6dfeb" stroke-width="2">
+      <rect x="1508" y="370" width="160" height="58" rx="12"/><rect x="1688" y="370" width="160" height="58" rx="12"/>
+      <rect x="1508" y="442" width="160" height="58" rx="12"/><rect x="1688" y="442" width="160" height="58" rx="12"/>
+    </g>
+    <g class="small ink"><text x="1588" y="405" text-anchor="middle">Request A</text><text x="1768" y="405" text-anchor="middle">Request B</text><text x="1588" y="477" text-anchor="middle">Request C</text><text x="1768" y="477" text-anchor="middle">Request D</text></g>
+    <text x="1678" y="545" text-anchor="middle" fill="#8ccdb9" font-size="35">↓</text>
+    <text x="1088" y="605" class="label">IN-FLIGHT REGISTRY</text>
+    <rect x="1508" y="565" width="340" height="60" rx="12" fill="#e8f8f2" stroke="#a8dfcb" stroke-width="2"/>
+    <text x="1678" y="593" text-anchor="middle" fill="#087456" class="body">One shared</text>
+    <text x="1678" y="617" text-anchor="middle" fill="#087456" class="body">CompletableFuture</text>
+    <text x="1678" y="675" text-anchor="middle" fill="#8ccdb9" font-size="35">↓</text>
+    <text x="1088" y="735" class="label">DOWNSTREAM CALLS</text>
+    <g class="small muted"><text x="1508" y="725">Owner</text><text x="1508" y="765">Waiters</text><text x="1508" y="805">Waiters</text><text x="1508" y="845">Waiters</text></g>
+    <g fill="#159a72"><rect x="1648" y="711" width="200" height="14" rx="7"/></g>
+    <g fill="#a8dfcb"><rect x="1648" y="751" width="200" height="14" rx="7"/><rect x="1648" y="791" width="200" height="14" rx="7"/><rect x="1648" y="831" width="200" height="14" rx="7"/></g>
+    <rect x="1088" y="920" width="840" height="130" rx="16" fill="#e8f8f2"/>
+    <text x="1118" y="968" fill="#087456" class="body">One downstream call populates the cache</text>
+    <text x="1118" y="1002" fill="#087456" class="body">and releases every waiting caller with the same result.</text>
+  </g>
+
+</svg>

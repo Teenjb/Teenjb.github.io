@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thundering Herd vs Single-Flight</title>
+  <style>
+    :root {
+      --ink: #10233f;
+      --muted: #5b6b83;
+      --line: #d6dfeb;
+      --panel: #ffffff;
+      --canvas: #f4f7fb;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --red: #dc4c64;
+      --red-soft: #fff0f2;
+      --green: #159a72;
+      --green-soft: #e8f8f2;
+      --gold: #b7791f;
+      --gold-soft: #fff7e6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      width: 1440px;
+      min-height: 900px;
+      padding: 36px 48px;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .header { max-width: 1344px; margin-bottom: 22px; }
+    .eyebrow { color: var(--blue); font-weight: 800; font-size: 16px; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 8px 0 8px; font-size: 42px; line-height: 1.08; letter-spacing: -.035em; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.35; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { overflow: hidden; background: var(--panel); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 12px 26px rgba(23, 44, 76, .07); }
+    .card-head { display: flex; align-items: center; gap: 12px; padding: 18px 22px 16px; border-bottom: 1px solid var(--line); }
+    .badge { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; color: #fff; font-weight: 900; }
+    .bad { background: var(--red); }
+    .good { background: var(--green); }
+    h2 { margin: 0; font-size: 23px; letter-spacing: -.02em; }
+    .card-head p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+    .flow { padding: 20px 22px 22px; }
+
+    .stage { display: grid; grid-template-columns: 210px 1fr; gap: 18px; align-items: center; min-height: 68px; }
+    .stage-label { color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .nodes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .request-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .node { padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fbfcfe; font-weight: 750; font-size: 14px; }
+    .node.miss { color: var(--red); background: var(--red-soft); border-color: #f4b9c2; }
+    .node.cache { width: 100%; color: var(--gold); background: var(--gold-soft); border-color: #f1d69d; }
+    .node.shared { color: var(--green); background: var(--green-soft); border-color: #a8dfcb; }
+    .node.downstream { color: var(--blue); background: var(--blue-soft); border-color: #b9cefb; }
+    .arrow { display: flex; align-items: center; justify-content: center; height: 24px; margin: 0 0 0 210px; color: var(--line); font-size: 24px; }
+    .arrow.red { color: #e99aa5; }
+    .arrow.green { color: #8ccdb9; }
+
+    .call-stack { display: grid; gap: 6px; width: 100%; }
+    .call { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 9px; }
+    .call span { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .call i { display: block; height: 8px; border-radius: 99px; background: var(--red); }
+    .call i.single { background: var(--green); max-width: 290px; }
+
+    .outcome { margin-top: 16px; padding: 14px 16px; border-radius: 12px; font-weight: 750; line-height: 1.35; }
+    .outcome.bad-outcome { color: #a52f45; background: var(--red-soft); }
+    .outcome.good-outcome { color: #087456; background: var(--green-soft); }
+
+    .footer { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 20px; }
+    .principle, .legend { padding: 18px 22px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; }
+    .principle strong { display: block; margin-bottom: 6px; font-size: 16px; }
+    .principle p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.35; }
+    .legend { display: flex; align-items: center; gap: 18px; }
+    .legend-item { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.cache-dot { background: var(--gold); }
+    .dot.call-dot { background: var(--blue); }
+    .dot.problem-dot { background: var(--red); }
+    .dot.fix-dot { background: var(--green); }
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="eyebrow">Microservice reliability</div>
+    <h1>Thundering Herd vs. Single-Flight Access</h1>
+    <p class="subtitle">A cache can stop repeated reads after a value exists. Single-flight prevents duplicate work while the value is still being loaded.</p>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <div class="card-head">
+        <div class="badge bad">×</div>
+        <div><h2>Cache miss race</h2><p>Every caller observes the miss and starts work.</p></div>
+      </div>
+      <div class="flow">
+        <div class="stage"><div class="stage-label">Concurrent callers</div><div class="nodes request-grid"><div class="node">Request A</div><div class="node">Request B</div><div class="node">Request C</div><div class="node">Request D</div></div></div>
+        <div class="arrow red">↓</div>
+        <div class="stage"><div class="stage-label">Cache lookup</div><div class="nodes"><div class="node cache">MISS × 4</div></div></div>
+        <div class="arrow red">↓</div>
+        <div class="stage"><div class="stage-label">Downstream calls</div><div class="call-stack"><div class="call"><span>Request A</span><i></i></div><div class="call"><span>Request B</span><i></i></div><div class="call"><span>Request C</span><i></i></div><div class="call"><span>Request D</span><i></i></div></div></div>
+        <div class="outcome bad-outcome">Duplicate calls saturate the downstream service, increasing latency and triggering retries.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div class="badge good">✓</div>
+        <div><h2>Single-flight accessor</h2><p>Only the first caller loads; the rest share its future.</p></div>
+      </div>
+      <div class="flow">
+        <div class="stage"><div class="stage-label">Concurrent callers</div><div class="nodes request-grid"><div class="node">Request A</div><div class="node">Request B</div><div class="node">Request C</div><div class="node">Request D</div></div></div>
+        <div class="arrow green">↓</div>
+        <div class="stage"><div class="stage-label">In-flight registry</div><div class="nodes"><div class="node shared">One shared CompletableFuture</div></div></div>
+        <div class="arrow green">↓</div>
+        <div class="stage"><div class="stage-label">Downstream calls</div><div class="call-stack"><div class="call"><span>Owner</span><i class="single"></i></div><div class="call"><span>Waiters</span><i class="single" style="opacity:.35"></i></div><div class="call"><span>Waiters</span><i class="single" style="opacity:.35"></i></div><div class="call"><span>Waiters</span><i class="single" style="opacity:.35"></i></div></div></div>
+        <div class="outcome good-outcome">One downstream call populates the cache and releases every waiting caller with the same result.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="principle"><strong>Core principle</strong><p>For a given key, allow only one downstream request to be in progress. Share its <code>CompletableFuture</code> with concurrent callers.</p></div>
+    <div class="legend"><div class="legend-item"><span class="dot cache-dot"></span>Cache</div><div class="legend-item"><span class="dot call-dot"></span>Call</div><div class="legend-item"><span class="dot problem-dot"></span>Herd</div><div class="legend-item"><span class="dot fix-dot"></span>Single-flight</div></div>
+  </footer>
+</body>
+</html>
