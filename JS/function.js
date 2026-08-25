@@ -63,11 +63,15 @@ if (footer) {
 menuButton?.addEventListener('click', () => {
   const open = navigation.classList.toggle('open');
   menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.classList.toggle('is-open', open);
+  siteHeader?.classList.toggle('menu-open', open);
 });
 
 document.querySelectorAll('#site-navigation a').forEach((link) => link.addEventListener('click', () => {
   navigation.classList.remove('open');
   menuButton?.setAttribute('aria-expanded', 'false');
+  menuButton?.classList.remove('is-open');
+  siteHeader?.classList.remove('menu-open');
 }));
 
 document.querySelector('#current-year').textContent = new Date().getFullYear();
