@@ -83,7 +83,7 @@ fetch('data/medium-posts.json')
       <article class="post">
         <time datetime="${publishedAt}">${formatDate.format(new Date(publishedAt))}</time>
         <div><h3><a href="${url}" target="_blank" rel="noreferrer">${title}</a></h3><p>${excerpt || categories.join(' · ')}</p></div>
-        <a href="${url}" target="_blank" rel="noreferrer" aria-label="Read ${title} on Medium">Read ↗</a>
+        <a href="${url}" target="_blank" rel="noreferrer" aria-label="Read ${title} on Medium">Read ↗︎</a>
       </article>`).join('');
   })
-  .catch(() => { posts.innerHTML = '<p>Latest articles are available on <a href="https://medium.com/@fateennjb.i" target="_blank" rel="noreferrer">Medium ↗</a>.</p>'; });
+  .catch(() => { posts.innerHTML = '<p>Latest articles are available on <a href="https://medium.com/@fateennjb.i" target="_blank" rel="noreferrer">Medium ↗︎</a>.</p>'; });
