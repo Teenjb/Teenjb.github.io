@@ -7,6 +7,7 @@ const script = await readFile(new URL('../JS/function.js', import.meta.url), 'ut
 const css = await readFile(new URL('../CSS/Style.css', import.meta.url), 'utf8');
 const robots = await readFile(new URL('../robots.txt', import.meta.url), 'utf8').catch(() => '');
 const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8').catch(() => '');
+const favicon = await readFile(new URL('../asset/Image/favicon.svg', import.meta.url), 'utf8').catch(() => '');
 
 test('provides recruiter-focused search metadata and profile structured data', () => {
   assert.match(html, /<title>Fateen Najib Indramustika \| Software Engineer \| Cloud, Backend &amp; AI<\/title>/i);
@@ -41,6 +42,13 @@ test('allows crawling and publishes the homepage sitemap', () => {
   assert.match(sitemap, /<loc>https:\/\/teenjb\.me\/<\/loc>/);
 });
 
+test('uses the FN monogram as the browser icon', () => {
+  assert.match(html, /<link rel="icon" href="asset\/Image\/favicon\.svg" type="image\/svg\+xml">/i);
+  assert.match(favicon, />FN<\/text>/i);
+  assert.doesNotMatch(favicon, /<tspan|FN\./i);
+  assert.match(favicon, /<text x="32"[^>]*text-anchor="middle"[^>]*font-family="Arial, Helvetica, sans-serif"/i);
+});
+
 test('provides the revised portfolio sections and résumé CTA', () => {
   for (const section of ['about', 'projects', 'experience', 'capabilities', 'writing', 'contact']) {
     assert.match(html, new RegExp(`<section[^>]+id="${section}"`, 'i'));
@@ -62,4 +70,22 @@ test('uses direct contact instead of an inactive form', () => {
 test('includes a stable Medium fallback and loads writing data', () => {
   assert.match(html, /https:\/\/medium\.com\/@fateennjb\.i/);
   assert.match(script, /data\/medium-posts\.json/);
+});
+
+test('provides restrained, accessible first-entrance motion', () => {
+  assert.match(css, /--motion-ease:/);
+  assert.match(css, /\.motion-ready\s+\.reveal/);
+  assert.match(css, /\.reveal\.is-visible/);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.motion-ready\s+\.reveal/);
+  assert.match(script, /IntersectionObserver/);
+  assert.match(script, /observeReveals/);
+  assert.match(script, /posts\.querySelectorAll\('\.post'\)/);
+  assert.doesNotMatch(css, /\.about-grid img:hover\{[^}]*filter:/);
+  assert.match(script, /const scrambleHeroTitle/);
+  assert.match(script, /const scrambleAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'/);
+  assert.match(script, /scrambleHeroTitle\(\)/);
+  assert.match(script, /character === character\.toUpperCase\(\) \? scrambledCharacter : scrambledCharacter\.toLowerCase\(\)/);
+  assert.match(css, /scroll-snap-type:y mandatory/);
+  assert.match(css, /main > \.section\{scroll-snap-align:center/);
+  assert.match(css, /@media\(prefers-reduced-motion:no-preference\)\{\s*html\{scroll-snap-type:y mandatory/);
 });

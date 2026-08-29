@@ -5,6 +5,88 @@ const experience = document.querySelector('#experience');
 const aboutLink = document.querySelector('.about .text-link');
 const focusList = document.querySelector('.hero aside ul');
 const writingLink = document.querySelector('#writing > .text-link');
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const motionEnabled = !reducedMotionQuery.matches;
+
+let revealObserver = null;
+
+if (motionEnabled) {
+  document.documentElement.classList.add('motion-ready');
+
+  if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10%', threshold: 0.08 });
+  }
+}
+
+const observeReveals = (elements, stagger = 0, immediate = false) => {
+  if (!motionEnabled) return;
+
+  [...elements].forEach((element, index) => {
+    element.classList.add('reveal');
+    element.style.setProperty('--motion-delay', `${index * stagger}ms`);
+
+    if (immediate) {
+      requestAnimationFrame(() => element.classList.add('is-visible'));
+    } else if (revealObserver) {
+      revealObserver.observe(element);
+    } else {
+      element.classList.add('is-visible');
+    }
+  });
+};
+
+observeReveals(document.querySelectorAll('.hero > div > *, .hero aside'), 55, true);
+observeReveals(document.querySelectorAll('main > .section:not(.hero)'), 0);
+observeReveals(document.querySelectorAll('.about-grid > *, .cards article, .experience-list article, #capabilities .capabilities article'), 45);
+
+const heroTitle = document.querySelector('.hero h1');
+const scrambleAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const scrambleHeroTitle = () => {
+  if (!motionEnabled || !heroTitle) return;
+
+  const textNodes = [...heroTitle.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE);
+  const originalText = textNodes.map((node) => node.textContent);
+  const letterCount = originalText.join('').replace(/[^a-z]/gi, '').length;
+  const duration = 460;
+  let startTime = null;
+
+  if (!letterCount) return;
+
+  const animate = (timestamp) => {
+    if (startTime === null) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const resolvedLetters = Math.floor(letterCount * progress);
+    const scrambleStep = Math.floor(elapsed / 45);
+    let currentLetter = 0;
+
+    textNodes.forEach((node, nodeIndex) => {
+      node.textContent = [...originalText[nodeIndex]].map((character) => {
+        if (!/[a-z]/i.test(character)) return character;
+        currentLetter += 1;
+        if (currentLetter <= resolvedLetters) return character;
+        const scrambledCharacter = scrambleAlphabet[(currentLetter * 5 + scrambleStep) % scrambleAlphabet.length];
+        return character === character.toUpperCase() ? scrambledCharacter : scrambledCharacter.toLowerCase();
+      }).join('');
+    });
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      textNodes.forEach((node, nodeIndex) => { node.textContent = originalText[nodeIndex]; });
+    }
+  };
+
+  requestAnimationFrame(animate);
+};
+
+scrambleHeroTitle();
 
 if (aboutLink) aboutLink.style.marginLeft = '0';
 if (focusList) focusList.style.paddingLeft = '1.1rem';
@@ -89,5 +171,6 @@ fetch('data/medium-posts.json')
         <div><h3><a href="${url}" target="_blank" rel="noreferrer">${title}</a></h3><p>${excerpt || categories.join(' · ')}</p></div>
         <a href="${url}" target="_blank" rel="noreferrer" aria-label="Read ${title} on Medium">Read ↗︎</a>
       </article>`).join('');
+    observeReveals(posts.querySelectorAll('.post'), 45);
   })
   .catch(() => { posts.innerHTML = '<p>Latest articles are available on <a href="https://medium.com/@fateennjb.i" target="_blank" rel="noreferrer">Medium ↗︎</a>.</p>'; });

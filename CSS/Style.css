@@ -6,3 +6,27 @@
 .hero{padding-top:4rem;padding-bottom:4rem}.hero h1{font-size:clamp(3rem,7vw,6.5rem)}
 @media(max-width:720px){.hero{padding-top:3.5rem}.hero h1{font-size:clamp(2.8rem,12vw,4.6rem)}}
 body{font-variant-emoji:text}.text-link,.button{font-variant-emoji:text}
+
+:root{--motion-ease:cubic-bezier(.2,.8,.2,1);--motion-fast:180ms;--motion-base:320ms;--motion-slow:420ms;--motion-distance:12px}
+@media(prefers-reduced-motion:no-preference){
+  html{scroll-snap-type:y mandatory;scroll-padding-block:80px}
+  main > .section{scroll-snap-align:center;scroll-snap-stop:normal}
+  .motion-ready .reveal{opacity:0;transform:translateY(var(--motion-distance));transition:opacity var(--motion-base) var(--motion-ease),transform var(--motion-base) var(--motion-ease);transition-delay:var(--motion-delay,0ms)}
+  .motion-ready .hero .reveal{--motion-distance:8px}
+  .motion-ready .reveal.is-visible{opacity:1;transform:translateY(0)}
+  .button,.text-link,.site-header nav a,footer a{transition:color var(--motion-fast) var(--motion-ease),background-color var(--motion-fast) var(--motion-ease),border-color var(--motion-fast) var(--motion-ease),box-shadow var(--motion-fast) var(--motion-ease),transform var(--motion-fast) var(--motion-ease)}
+  .site-header nav a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat}
+  .site-header nav a:hover,.site-header nav a:focus-visible{background-size:100% 1px}
+  .text-link:hover{color:#476775;text-decoration-thickness:2px}
+  .button:hover{background:#254653;border-color:#254653;box-shadow:0 8px 18px rgba(24,49,62,.16);transform:translateY(-2px)}
+  .button--quiet:hover{background:var(--ink);color:var(--white)}
+  .cards article,.capabilities article{transition:transform var(--motion-fast) var(--motion-ease),box-shadow var(--motion-fast) var(--motion-ease)}
+  .cards article:hover,.capabilities article:hover{position:relative;z-index:1;box-shadow:0 10px 22px rgba(24,49,62,.13);transform:translateY(-2px)}
+  .about-grid img{transition:transform var(--motion-base) var(--motion-ease),box-shadow var(--motion-base) var(--motion-ease)}
+  .about-grid img:hover{box-shadow:0 10px 22px rgba(24,49,62,.14);transform:scale(1.01)}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .motion-ready .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
