@@ -1,12 +1,16 @@
 {
   "profileUrl": "https://medium.com/@fateennjb.i",
-  "updatedAt": "2026-08-25T06:30:21.934Z",
+  "updatedAt": "2026-08-31T09:42:46.981Z",
   "articles": [
     {
       "title": "Thundering Herd Experience and How a Single Flight Accessor Saved Us",
       "url": "https://medium.com/@fateennjb.i/thundering-herd-experience-and-how-a-single-flight-accessor-saved-us-380a5b6a9363?source=rss-ec980e8764dd------2",
       "publishedAt": "2026-08-25T06:25:30.000Z",
-      "categories": [],
+      "categories": [
+        "software-engineering",
+        "java",
+        "access-pattern"
+      ],
       "excerpt": ""
     },
     {
