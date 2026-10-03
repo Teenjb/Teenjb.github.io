@@ -85,7 +85,5 @@ test('provides restrained, accessible first-entrance motion', () => {
   assert.match(script, /const scrambleAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'/);
   assert.match(script, /scrambleHeroTitle\(\)/);
   assert.match(script, /character === character\.toUpperCase\(\) \? scrambledCharacter : scrambledCharacter\.toLowerCase\(\)/);
-  assert.match(css, /scroll-snap-type:y mandatory/);
-  assert.match(css, /main > \.section\{scroll-snap-align:center/);
-  assert.match(css, /@media\(prefers-reduced-motion:no-preference\)\{\s*html\{scroll-snap-type:y mandatory/);
+  assert.doesNotMatch(css, /scroll-snap-type|scroll-snap-align/);
 });

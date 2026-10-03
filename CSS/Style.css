@@ -9,8 +9,6 @@ body{font-variant-emoji:text}.text-link,.button{font-variant-emoji:text}
 
 :root{--motion-ease:cubic-bezier(.2,.8,.2,1);--motion-fast:180ms;--motion-base:320ms;--motion-slow:420ms;--motion-distance:12px}
 @media(prefers-reduced-motion:no-preference){
-  html{scroll-snap-type:y mandatory;scroll-padding-block:80px}
-  main > .section{scroll-snap-align:center;scroll-snap-stop:normal}
   .motion-ready .reveal{opacity:0;transform:translateY(var(--motion-distance));transition:opacity var(--motion-base) var(--motion-ease),transform var(--motion-base) var(--motion-ease);transition-delay:var(--motion-delay,0ms)}
   .motion-ready .hero .reveal{--motion-distance:8px}
   .motion-ready .reveal.is-visible{opacity:1;transform:translateY(0)}
