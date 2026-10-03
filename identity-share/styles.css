@@ -17,6 +17,15 @@
 * { box-sizing: border-box; }
 html { min-width: 320px; background: var(--canvas); }
 body { margin: 0; color: var(--ink); background: var(--canvas); font-size: 15px; line-height: 1.55; }
+html, body {
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
 button, input { font: inherit; }
 button { color: inherit; }
 button:focus-visible, a:focus-visible, input:focus-visible, .drop-zone:focus-visible { outline: 3px solid #438c70; outline-offset: 3px; }
@@ -166,6 +175,7 @@ input[type="range"] { width: 100%; height: 18px; margin: 0; accent-color: var(--
   .intro-copy { max-width: 36ch; margin-top: 15px; font-size: 13px; }
   .workspace { grid-template-columns: 1fr; gap: 12px; }
   .editor-panel { padding: 21px 18px; }
+  .field-group input[type="text"], .page-input-wrap input { font-size: 16px; }
   .panel-heading { margin-bottom: 18px; }
   .drop-zone { min-height: 148px; }
   .preview-panel { min-height: 450px; padding: 19px 16px 15px; }
