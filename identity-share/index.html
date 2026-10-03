@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#eef2ef">
+  <meta name="description" content="Add a purpose and date watermark to a document copy. Your files stay on your device.">
+  <meta name="color-scheme" content="light">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Identity Share">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Identity Share — Prepare a safer copy</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to app</a>
+  <header class="topbar">
+    <a class="wordmark" href="./" aria-label="Identity Share home"><span class="wordmark-mark" aria-hidden="true">IS</span><span>identity<span class="wordmark-light">share</span></span></a>
+    <div class="topbar-actions">
+      <span class="privacy-chip"><span class="privacy-dot" aria-hidden="true"></span>Files stay on this device</span>
+      <button class="install-button" id="install-button" type="button" hidden>Install app</button>
+      <a class="back-link" href="/">Teenjb.me <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main" class="app-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> A more considered document copy</p>
+      <h1 id="page-title">Share a copy<br><span>with a purpose.</span></h1>
+      <p class="intro-copy">Add a subtle, dated watermark before you send a document photo. Your original never leaves this browser.</p>
+    </section>
+
+    <div class="workspace">
+      <section class="editor-panel" aria-labelledby="editor-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow eyebrow--small">Your document</p>
+            <h2 id="editor-title">Prepare a share copy</h2>
+          </div>
+          <span class="step-mark" aria-hidden="true">01 <span>/ 01</span></span>
+        </div>
+
+        <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Choose a photo or PDF from your device">
+          <input class="visually-hidden" id="file-input" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.pdf">
+          <div class="upload-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M16 21V5m0 0-6 6m6-6 6 6M6 19v7h20v-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="drop-copy">
+            <strong>Choose a photo or PDF</strong>
+            <span>or drop a file here</span>
+          </div>
+          <span class="file-types">JPG · PNG · WEBP · HEIC · TIFF · PDF</span>
+        </div>
+        <p class="capture-note">On a phone, choose <strong>Take Photo</strong> in the file picker to use your camera.</p>
+
+        <div class="document-controls" id="document-controls" hidden>
+          <div class="file-summary">
+            <span class="file-badge" id="file-badge">IMG</span>
+            <div class="file-summary-copy"><strong id="file-name">Document</strong><span id="file-detail">Ready to mark</span></div>
+            <button class="icon-button" id="clear-button" type="button" aria-label="Remove document" title="Remove document"><span aria-hidden="true">×</span></button>
+          </div>
+          <div class="pdf-page-control" id="pdf-page-control" hidden>
+            <label for="pdf-page">PDF page</label>
+            <div class="page-input-wrap"><input id="pdf-page" type="number" min="1" value="1" inputmode="numeric"><span id="pdf-page-count">of 1</span></div>
+          </div>
+
+          <div class="field-group">
+            <label for="purpose">Sharing purpose <span class="required-mark">Required</span></label>
+            <input id="purpose" type="text" maxlength="70" placeholder="e.g. Apartment application" autocomplete="off">
+            <span class="field-hint">This text and today’s date repeat across the copy.</span>
+          </div>
+
+          <div class="field-group field-group--slider">
+            <div class="field-label-row"><label for="opacity">Watermark visibility</label><output id="opacity-value" for="opacity">14%</output></div>
+            <input id="opacity" type="range" min="6" max="32" value="14" step="1">
+            <div class="range-ends"><span>Fainter</span><span>Stronger</span></div>
+          </div>
+
+          <fieldset class="format-fieldset">
+            <legend>Download as</legend>
+            <div class="format-options">
+              <label class="format-option"><input type="radio" name="format" value="image/jpeg" checked><span>JPEG <small>Smaller file</small></span></label>
+              <label class="format-option"><input type="radio" name="format" value="image/png"><span>PNG <small>Sharper text</small></span></label>
+            </div>
+          </fieldset>
+
+          <button class="download-button" id="download-button" type="button" disabled><span>Download share copy</span><span aria-hidden="true">↓</span></button>
+          <p class="export-note">A new copy is created. The source photo stays unchanged.</p>
+        </div>
+      </section>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="preview-heading">
+          <div><p class="eyebrow eyebrow--small">Live preview</p><h2 id="preview-title">Your marked copy</h2></div>
+          <span class="preview-status" id="preview-status"><span aria-hidden="true">◌</span> Waiting for a photo</span>
+        </div>
+        <div class="preview-stage" id="preview-stage">
+          <div class="preview-empty" id="preview-empty">
+            <div class="empty-document" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
+            <strong>Your preview will appear here</strong>
+            <p>Choose a photo or scan to get started.</p>
+          </div>
+          <canvas id="preview-canvas" aria-label="Watermarked document preview" hidden></canvas>
+          <div class="preview-loading" id="preview-loading" hidden><span class="loading-ring" aria-hidden="true"></span><span>Preparing your document…</span></div>
+        </div>
+        <div class="preview-footer">
+          <span class="privacy-lock" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><rect x="3.5" y="8.5" width="13" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 8.5V6a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          <p><strong>Private by design.</strong> Processing happens on your device. No document is uploaded or saved.</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
+    <section class="how-it-works" aria-label="How it works">
+      <p>Choose a document <span aria-hidden="true">→</span> Add your purpose <span aria-hidden="true">→</span> Download a safer copy</p>
+    </section>
+  </main>
+
+  <dialog class="install-dialog" id="install-dialog" aria-labelledby="install-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+    <p class="eyebrow eyebrow--small">Keep it close</p>
+    <h2 id="install-title">Add Identity Share to your device</h2>
+    <div class="install-instructions">
+      <p><strong>iPhone or iPad</strong><br>Open the Share menu, then choose <em>Add to Home Screen</em>.</p>
+      <p><strong>Mac with Safari</strong><br>Choose <em>File → Add to Dock</em>.</p>
+      <p><strong>Chrome</strong><br>Choose the install icon in the address bar or browser menu.</p>
+    </div>
+  </dialog>
+
+  <footer class="site-footer"><span>Identity Share</span><span>Made for a more thoughtful share.</span></footer>
+  <script src="./vendor/tiff/pako.min.js" defer></script>
+  <script src="./vendor/tiff/UTIF.js" defer></script>
+  <script src="./vendor/heic/heic2any.min.js" defer></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
